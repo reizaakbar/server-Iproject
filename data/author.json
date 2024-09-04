@@ -1,27 +1,32 @@
 [
   {
-    "name": "reza",
-    "email": "reza@mail.com",
+    "name": "rey",
+    "email": "rey@mail.com",
     "password": "12345"
   },
   {
-    "name": "cecep",
-    "email": "cecep@mail.com",
+    "name": "test1",
+    "email": "test1@mail.com",
     "password": "12345"
   },
   {
-    "name": "jajang",
-    "email": "jajang@mail.com",
+    "name": "test2",
+    "email": "test2@mail.com",
     "password": "12345"
   },
   {
-    "name": "jujung",
-    "email": "jujung@mail.com",
+    "name": "test3",
+    "email": "test3@mail.com",
     "password": "12345"
   },
   {
-    "name": "bujang",
-    "email": "bujang@mail.com",
+    "name": "test4",
+    "email": "test4@mail.com",
+    "password": "12345"
+  },
+  {
+    "name": "test5",
+    "email": "test5@mail.com",
     "password": "12345"
   }
 ]
