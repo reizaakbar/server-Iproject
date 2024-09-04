@@ -19,8 +19,6 @@ class UserController {
 
       const payload = ticket.getPayload();
 
-      //   console.log(payload,);
-
       const [user, created] = await Author.findOrCreate({
         where: {
           email: payload.email,

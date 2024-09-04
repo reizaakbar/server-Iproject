@@ -4,7 +4,6 @@ const { v2: cloudinary } = require("cloudinary");
 const multer = require("multer");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// Konfigurasi Multer untuk menangani upload file
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage }).single("image");
 
@@ -17,16 +16,14 @@ cloudinary.config({
 class ReviewController {
   static async readReviewUser(req, res, next) {
     try {
-      // Pastikan loginInfo ada
       const { userId } = req.loginInfo;
       if (!userId) throw { name: "Unauthorized" };
 
-      // Cari semua review yang dimiliki oleh user yang sedang login
       const reviewed = await Review.findAll({
         where: {
           authorId: userId,
         },
-        include: [Author], // Menyertakan informasi Author jika diperlukan
+        include: [Author],
       });
 
       res.status(200).json({
@@ -57,14 +54,12 @@ class ReviewController {
       try {
         if (err) throw err;
 
-        // Pastikan loginInfo ada
         const { userId } = req.loginInfo;
         if (!userId) throw { name: "Unauthorized" };
 
-        const { name, rate, address, review } = req.body; // Tidak memerlukan authorId dari req.body
+        const { name, rate, address, review } = req.body;
         let imageUrl = null;
 
-        // Upload image jika ada
         if (req.file) {
           const streamUpload = (buffer) => {
             return new Promise((resolve, reject) => {
@@ -86,13 +81,12 @@ class ReviewController {
           imageUrl = result.secure_url;
         }
 
-        // Buat review
         const reviewed = await Review.create({
           name,
           rate,
           address,
           review,
-          authorId: userId, // Gunakan userId dari req.loginInfo
+          authorId: userId,
           image: imageUrl,
         });
 
@@ -155,17 +149,14 @@ class ReviewController {
 
         const { id } = req.params;
 
-        // Cari review berdasarkan ID
         const reviewed = await Review.findByPk(id);
 
         if (!reviewed) throw { name: "Review Not Found", id };
 
-        // Ambil data yang dikirim dari req.body
         const { name, rate, address, review, authorId } = req.body;
 
-        let imageUrl = reviewed.image; // Gunakan URL gambar yang sudah ada
+        let imageUrl = reviewed.image;
 
-        // Jika ada file yang di-upload, upload ke Cloudinary
         if (req.file) {
           const streamUpload = (buffer) => {
             return new Promise((resolve, reject) => {
@@ -184,10 +175,9 @@ class ReviewController {
           };
 
           const result = await streamUpload(req.file.buffer);
-          imageUrl = result.secure_url; // URL dari Cloudinary yang baru
+          imageUrl = result.secure_url;
         }
 
-        // Update data review dengan data baru, jika tidak ada gunakan data lama
         await Review.update(
           {
             name: name || reviewed.name,

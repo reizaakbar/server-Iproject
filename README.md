@@ -16,7 +16,7 @@ POST /login
 Deskripsi: Login untuk mendapatkan token autentikasi.
 Request Body:
 {
-"email": "caca@mail.com",
+"email": "cecep@mail.com",
 "password": 12345,
 }
 Review Endpoints

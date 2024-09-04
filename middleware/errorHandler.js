@@ -6,7 +6,7 @@ function errorHandler(error, req, res, next) {
 
   if (error.name === "SequelizeForeignKeyConstraintError") {
     status = 400;
-    message = "Invalid Category / Author";
+    message = "Invalid Author";
   }
 
   if (error.name === "SequelizeValidationError") {
@@ -14,9 +14,9 @@ function errorHandler(error, req, res, next) {
     message = error.errors.map((el) => el.message);
   }
 
-  if (error.name === "Article Not Found") {
+  if (error.name === "Review Not Found") {
     status = 404;
-    message = "Article Not Found";
+    message = "Review Not Found";
   }
 
   if (error.name === "SequelizeDatabaseError") {
