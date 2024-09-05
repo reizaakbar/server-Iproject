@@ -212,9 +212,9 @@ class ReviewController {
       const { harga, lokasi } = req.body;
 
       const prompt = `
-      Saya ingin sewa stadion dengan harga sekitar ${harga} rupiah di ${lokasi}
-Bisakah Anda merekomendasikan beberapa stadion dengan deskripsi singkat?
-Tolong urutkan stadion-stadion tersebut dengan angka 1, 2, 3, dan seterusnya. Jangan gunakan tanda bintang (*) atau garis miring baru. Sebutkan hanya nama stadion, harga, dan deskripsi dalam format teks biasa.
+      Saya ingin sewa stadion di ${lokasi}
+Bisakah Anda merekomendasikan 5 stadion dengan deskripsi singkat?
+Tolong urutkan stadion-stadion tersebut dengan angka 1, 2, 3, dan seterusnya. Jangan gunakan tanda bintang (*) atau garis miring baru. Sebutkan hanya nama stadion dan deskripsi dalam format teks biasa.
     `;
 
       const result = await model.generateContent(prompt);
